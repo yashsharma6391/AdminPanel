@@ -15,26 +15,21 @@ const app = express();
 const allowedOrigins = [process.env.FRONTEND_URL, process.env.ADMIN_URL]
 
 
-app.use(cors({
-     origin: allowedOrigins,
-     credentials: true
-     
-}));
 
-// app.use(cors({
-//     origin: function(origin, callback){
-//         //  console.log("Incoming request from origin:", origin);
-//     if(!origin) return callback(null, true); // allow non-browser requests like Postman
-//     if(allowedOrigins.includes(origin)){
-//       return callback(null, true);
-//     } else {
-//       //  console.log("Blocked by CORS:", origin);
-//       return callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+app.use(cors({
+    origin: function(origin, callback){
+        //  console.log("Incoming request from origin:", origin);
+    if(!origin) return callback(null, true); // allow non-browser requests like Postman
+    if(allowedOrigins.includes(origin)){
+      return callback(null, true);
+    } else {
+      //  console.log("Blocked by CORS:", origin);
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 
 
