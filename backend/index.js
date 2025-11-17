@@ -49,7 +49,7 @@ app.get(process.env.BASE_ROUTE, (req, res) => {
   res.send("Backend running successfully 🚀");
 });
 app.use(process.env.ADMIN_ROUTE, adminRoutes);
-app.use(process.env.API_ROUTE,adminAuth, serviceRoutes);
+app.use(process.env.API_ROUTE, serviceRoutes);
 
 const PORT = process.env.PORT || 5000;
 // Environment log removed for production
