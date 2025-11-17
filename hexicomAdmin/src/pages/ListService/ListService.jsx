@@ -40,7 +40,7 @@ useEffect(() => {
       const isAuthorized = await checkAuth();
       if (!isAuthorized) {
         toast.error("Please login first");
-        return navigate("/login"); // redirect if not authorized
+        return  // redirect if not authorized
       }
 
       // Only fetch list if authorized
@@ -58,24 +58,27 @@ useEffect(() => {
   init();
   
   // Re-check auth every 30 seconds to detect if admin was deleted
-  const authCheckInterval = setInterval(async () => {
-    const isAuthorized = await checkAuth();
-    if (!isAuthorized) {
-      // Check if admin exists at all
-      const adminExists = await checkAdminExists();
-      if (!adminExists) {
-        toast.error("Your admin account was deleted. Redirecting to create admin...");
-        navigate("/");
-      } else {
-        toast.error("Your session expired. Please login again...");
-        navigate("/login");
-      }
-      clearInterval(authCheckInterval);
-    }
-  }, 30000); // Check every 30 seconds
+  // const authCheckInterval = setInterval(async () => {
+  //   const isAuthorized = await checkAuth();
+  //   if (!isAuthorized) {
+  //     // Check if admin exists at all
+  //     const adminExists = await checkAdminExists();
+  //     if (!adminExists) {
+  //       toast.error("Your admin account was deleted. Redirecting to create admin...");
+  //       navigate("/");
+  //     } else {
+  //       toast.error("Your session expired. Please login again...");
+  //       navigate("/login");
+  //     }
+  //     clearInterval(authCheckInterval);
+  //   }
+  // }, 30000); // Check every 30 seconds
 
-  return () => clearInterval(authCheckInterval); // Cleanup on unmount
+  // return () => clearInterval(authCheckInterval); // Cleanup on unmount
 }, [navigate]);
+  useEffect(()=>{
+  fetchList()
+})
 if (loading) return <div className="text-center mt-5">Loading...</div>;
   return (
     <div className="py-5 row justify-content-center">
