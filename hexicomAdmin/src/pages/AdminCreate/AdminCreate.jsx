@@ -30,9 +30,12 @@ const AdminCreate = () => {
         if (exists) {
           toast.info("Admin already exists, Please login");
           navigate("/login");
-        } else {
-            
-         setShowForm(true); // show form if no admin exists
+        }else {
+            if (!exists){
+          toast.info("No Admin Please create one")
+          setShowForm(true);
+        }
+          // show form if no admin exists
         }
       } catch (err) {
         toast.error("Error checking admin existence");
