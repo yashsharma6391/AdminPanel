@@ -33,7 +33,7 @@ export const addService = async (data,image)=>{
 export const getService = async () =>{
     try {
       // debug: api url removed
-     const response = await axios.get(API_URL+"/services",{withCredentials:true});
+     const response = await axios.get(API_URL+"/services");
       return response.data;
     } catch (error) {
         // Error fetching food list (console removed)
