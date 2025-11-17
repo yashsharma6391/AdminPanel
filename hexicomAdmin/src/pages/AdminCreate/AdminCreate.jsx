@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { checkAdminExists, checkAuth } from "../../services/Service";
+const AdminPoint = import.meta.env.VITE_ACCESS_POINT_ADMIN;
 
 const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -54,7 +55,7 @@ const AdminCreate = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${BackendUrl}/api/admin/create`, { email, password });
+      const res = await axios.post(`${BackendUrl}${AdminPoint}/create`, { email, password });
       toast.success(res.data.message);
       navigate("/Login");
     } catch (err) {
