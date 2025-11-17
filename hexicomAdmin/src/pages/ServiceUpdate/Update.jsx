@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { updateService } from "../../services/Service";
+import { checkAdminExists, checkAuth, updateService } from "../../services/Service";
 const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 const AccessPoint = import.meta.env.VITE_ACCESS_POINT;
 
@@ -48,7 +48,7 @@ const Update = () => {
         }
         
         // If not authorized, check if admin exists
-        const adminExuseEffectists = await checkAdminExists();
+        const adminExists = await checkAdminExists();
         if (!adminExists) {
           // No admin in DB, redirect to create admin
           navigate("/");
@@ -62,9 +62,9 @@ const Update = () => {
       verifyAuth();
     }, [navigate]);
 
-  useEffect(() => {
-    getService();
-  }, []);
+  // useEffect(() => {
+  //   getService();
+  // }, []);
 
   // handle input
   const onChangeHandler = (e) => {
