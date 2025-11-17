@@ -76,7 +76,7 @@ router.patch("/:id", adminAuth, upload.single("Image"), async (req, res) => {
     res.status(500).json({ message: "Error updating service" });
   }
 });
-router.get("/services", adminAuth, async (req, res) => {
+router.get("/services", async (req, res) => {
   try {
     const services = await Service.find();
     res.json(services);
