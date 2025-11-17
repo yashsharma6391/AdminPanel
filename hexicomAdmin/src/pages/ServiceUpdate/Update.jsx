@@ -39,6 +39,28 @@ const Update = () => {
       
     }
   };
+     useEffect(() => {
+      const verifyAuth = async () => {
+        const authorized = await checkAuth();
+        if (!authorized) {
+          navigate("/login");
+          return;
+        }
+        
+        // If not authorized, check if admin exists
+        const adminExuseEffectists = await checkAdminExists();
+        if (!adminExists) {
+          // No admin in DB, redirect to create admin
+          navigate("/");
+          return;
+        }
+        else{
+          getService();
+        }
+        setChecking(false);
+      };
+      verifyAuth();
+    }, [navigate]);
 
   useEffect(() => {
     getService();
