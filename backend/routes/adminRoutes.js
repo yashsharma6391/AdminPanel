@@ -130,7 +130,8 @@ router.get("/logout", (req, res) => {
 });
 // ------------------- FORGOT PASSWORD -------------------
 router.post("/forgot-password", async (req, res) => {
-  const { email } = req.body;
+   try {
+     const { email } = req.body;
 
   const admin = await Admin.findOne({ email });
   if (!admin) return res.status(400).json({ message: "Admin not found" });
@@ -154,7 +155,36 @@ router.post("/forgot-password", async (req, res) => {
   );
 
   return res.json({ message: "Reset password link sent to email" });
+   } catch (error) {
+    res.status(500).json({ message: "Server error", error: err });
+   }
 });
+  
+//   const { email } = req.body;
+
+//   const admin = await Admin.findOne({ email });
+//   if (!admin) return res.status(400).json({ message: "Admin not found" });
+
+//   const resetToken = crypto.randomBytes(32).toString("hex");
+//   const hashedToken = crypto
+//     .createHash("sha256")
+//     .update(resetToken)
+//     .digest("hex");
+
+//   admin.resetPasswordToken = hashedToken;
+//   admin.resetPasswordExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+//   await admin.save();
+
+//   const resetURL = `${process.env.ADMIN_URL}/reset-password/${resetToken}`;
+
+//   await sendEmail(
+//     admin.email,
+//     "Admin Reset Password",
+//     `Reset your password using this link: ${resetURL}`
+//   );
+
+//   return res.json({ message: "Reset password link sent to email" });
+// });
 
 
 // ------------------- RESET PASSWORD -------------------
