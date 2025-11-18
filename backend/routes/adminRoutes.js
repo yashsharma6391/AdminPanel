@@ -156,7 +156,7 @@ router.post("/forgot-password", async (req, res) => {
 
   return res.json({ message: "Reset password link sent to email" });
    } catch (error) {
-    res.status(500).json({ message: "Server error", error: err });
+    res.status(500).json({ message: "Server error" });
    }
 });
   
