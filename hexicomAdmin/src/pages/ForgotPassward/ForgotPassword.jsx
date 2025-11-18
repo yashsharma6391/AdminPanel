@@ -18,6 +18,7 @@ const ForgotPassword = () => {
       setEmail("");
        
     } catch (err) {
+      console.log(err)
       toast.error(err.response?.data?.message || "Error sending reset link");
     } finally {
       setLoading(false);
