@@ -11,6 +11,10 @@ export const sendEmail = async (to, subject, text) => {
       pass: process.env.SMTP_PASSWORD,
     },
   });
+  transporter.verify((err, success) => {
+  if (err) console.error("SMTP CONNECTION ERROR:", err);
+  else console.log("SMTP CONNECTED SUCCESSFULLY");
+});
 
   await transporter.sendMail({
     from: process.env.SMTP_EMAIL,
